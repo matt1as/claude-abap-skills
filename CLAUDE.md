@@ -108,7 +108,7 @@ Several rules in this library differ between **BTP ABAP Environment** and **S/4H
 - The set of released APIs differs between systems
 - Some ATC variants behave differently
 
-**If the target system is not clear from context, ask the user before generating code.** Do not silently pick one. A single sentence — "Are you targeting BTP ABAP Environment or S/4HANA on-prem on-prem in Cloud development model?" — is always the right move when in doubt.
+**If the target system is not clear from context, ask the user before generating code.** Do not silently pick one. A single sentence — "Are you targeting BTP ABAP Environment or S/4HANA on-prem in the ABAP Cloud development model?" — is always the right move when in doubt.
 
 ---
 
