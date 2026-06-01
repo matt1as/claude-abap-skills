@@ -70,17 +70,17 @@ For a trial system this is usually direct internet access over HTTPS. In a
 production landscape, private connectivity or corporate routing rules may still
 apply.
 
-### 2. Decide whether Cloud Connector is needed
+### 2. Cloud Connector is not part of this path
 
-Use Cloud Connector only when your landscape requires a private network route
-between your workstation and the ABAP system. Typical cases:
+Cloud Connector is **not** required for workstation-to-BTP ADT access. SAP
+Cloud Connector is an on-prem agent that opens a tunnel from your on-prem
+network to a BTP subaccount, so BTP-hosted applications can reach on-prem
+systems. The direction is BTP → on-prem, not workstation → BTP.
 
-- Productive systems are not exposed directly to the public internet
-- Your company requires access through a controlled tunnel or internal route
-- Basis gives you a Cloud Connector based endpoint instead of a direct host
-
-If your BTP trial system is reachable directly over HTTPS, you usually do not
-need Cloud Connector for this workflow.
+Your VS Code / Claude Code workstation reaches BTP ABAP Environment directly
+over HTTPS using the ADT endpoint from the service key. Cloud Connector only
+becomes relevant if your BTP ABAP Environment itself needs to call back into
+on-prem systems — which is out of scope for this setup guide.
 
 ### 3. Create the ADT logon in VS Code
 
@@ -143,7 +143,30 @@ For on-prem access you usually need:
 - Network access to the ABAP system from your workstation
 - Any required corporate VPN or private route
 - SAP GUI or other landscape tooling already used by your team for SSO or trust
+- A working SNC setup on your workstation (see below)
 - A working ADT user with the required authorizations
+
+#### SNC for local development
+
+S/4HANA on-prem landscapes almost always require **SNC (Secure Network
+Communications)** for any local SAP client — SAP GUI, ADT, or the MCP server
+sitting on top of ADT. SNC provides the encrypted channel and the SSO identity
+the ABAP system expects from a workstation.
+
+Concretely this means:
+
+- A workstation SNC library is installed and configured (typically the SAP
+  Common Crypto Library or an SSO-product equivalent provided by your team)
+- The `SNC_LIB` environment variable points at that library
+- Your user is mapped to an SNC identity in the ABAP system (usually done by
+  Basis via `SU01` / `SNCSYSACL`)
+- The ADT destination in VS Code is configured to use SNC, matching the same
+  SNC name your SAP GUI logon already uses
+
+If SNC is not set up, the symptom is usually that SAP GUI works for your
+colleagues but ADT in VS Code refuses to log on, or logs on as an anonymous
+user with no authorizations. Fix SNC at the workstation and Basis level
+**before** involving Claude Code or the MCP layer.
 
 The exact transport path is Basis-dependent. The important requirement for this
 guide is simple: ADT in VS Code must already work before you involve Claude
