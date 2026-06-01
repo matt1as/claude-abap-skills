@@ -1,6 +1,6 @@
 # `clean-abap` plugin
 
-Universal Clean ABAP rules and two skills for Claude Code. Part of the [claude-abap-skills](../README.md) marketplace.
+Universal Clean ABAP rules and two skills for Claude Code. One of two plugins in the [claude-abap-skills](../README.md) repo (the other is [`abap-cloud-rap`](../abap-cloud-rap/README.md) — independent).
 
 ```bash
 claude plugin install clean-abap@claude-abap-skills

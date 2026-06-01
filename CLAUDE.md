@@ -1,11 +1,11 @@
 # claude-abap-skills
 
-This repository is a **Claude Code marketplace** that ships two plugins for modern ABAP development. It does not contain any MCP server code — it contains the rules, prompt templates, and slash commands that turn raw model output into **production-quality modern ABAP**.
+This repository contains **two independent Claude Code plugins** for modern ABAP development. It does not contain any MCP server code — it contains the rules, prompt templates, and slash commands that turn raw model output into **production-quality modern ABAP**.
 
 > The official SAP ABAP MCP Server (`SAPSE.adt-vscode`) gives Claude **hands and eyes** into the system.
 > This library gives Claude the **brain**: how to write good code, not just what to access.
 
-This file describes the library for anyone working **on** it. End users install the plugins via the marketplace — see `README.md`.
+This file describes the library for anyone working **on** it. End users install the plugins via `claude plugin marketplace add` — see `README.md`.
 
 ---
 
@@ -59,9 +59,9 @@ Skills that need read access (review, refactor, atc-remediation, clean-core-chec
 ## Repository layout
 
 ```
-claude-abap-skills/                          # marketplace root
+claude-abap-skills/                          # repo root
 ├── .claude-plugin/
-│   └── marketplace.json                     # lists both plugins
+│   └── marketplace.json                     # manifest listing both plugins
 ├── CLAUDE.md                                # this file
 ├── README.md                                # install instructions
 ├── LICENSE                                  # Apache 2.0
@@ -87,7 +87,7 @@ Each plugin's `CLAUDE.md` holds the **rule set**. It is **not** auto-loaded by C
 - `clean-abap` skills read `../CLAUDE.md` (their own plugin's rules)
 - `abap-cloud-rap` skills read `../CLAUDE.md` (their own plugin's rules)
 
-The two plugins are **independent** — neither reads the other's `CLAUDE.md` at runtime. This is intentional: when plugins are installed via the marketplace, each lives in its own versioned subdirectory (e.g. `~/.claude/plugins/cache/claude-abap-skills/clean-abap/0.2.1/`), so cross-plugin relative paths cannot reliably resolve. If a contributor wants a Cloud/RAP skill to also surface Clean ABAP findings, embed the relevant rule inline in `abap-cloud-rap/CLAUDE.md` — do not reach for `../../clean-abap/CLAUDE.md`.
+The two plugins are **independent** — neither reads the other's `CLAUDE.md` at runtime. This is intentional: when plugins are installed via Claude Code's plugin system, each lives in its own versioned subdirectory (e.g. `~/.claude/plugins/cache/claude-abap-skills/clean-abap/0.2.2/`), so cross-plugin relative paths cannot reliably resolve. If a contributor wants a Cloud/RAP skill to also surface Clean ABAP findings, embed the relevant rule inline in `abap-cloud-rap/CLAUDE.md` — do not reach for `../../clean-abap/CLAUDE.md`.
 
 ---
 

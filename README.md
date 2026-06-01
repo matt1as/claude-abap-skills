@@ -2,7 +2,7 @@
 
 **The official SAP ABAP MCP Server gives Claude hands. This library gives it a brain.**
 
-A Claude Code marketplace shipping two plugins for modern ABAP development — SAP BTP ABAP Environment and S/4HANA 2023+ in the ABAP Cloud development model.
+Two Claude Code plugins for modern ABAP development — SAP BTP ABAP Environment and S/4HANA 2023+ in the ABAP Cloud development model. They live together in this repo but are independent — install either or both.
 
 ---
 
@@ -15,7 +15,7 @@ This is **not** an MCP server. There is no system connector code here. All syste
 | Component                                  | Role                                                                         |
 |--------------------------------------------|------------------------------------------------------------------------------|
 | `SAPSE.adt-vscode` (official SAP MCP)      | **Hands & eyes** — create/activate objects, run ATC, run unit tests, generate RAP services |
-| `claude-abap-skills` (this marketplace)    | **Brain** — what to write, what to avoid, how to structure RAP, how to review |
+| `claude-abap-skills` (this repo)           | **Brain** — what to write, what to avoid, how to structure RAP, how to review |
 
 ---
 
@@ -72,7 +72,7 @@ See `docs/mcp-setup.md` for connection details.
 Two commands. Both plugins, available in every Claude Code session.
 
 ```bash
-# 1. Add this repo as a marketplace
+# 1. Register this repo as a plugin source for Claude Code
 claude plugin marketplace add https://github.com/matt1as/claude-abap-skills
 
 # 2. Install both plugins (or just one — they work independently, but pair best together)
@@ -122,7 +122,7 @@ claude plugin marketplace remove claude-abap-skills
 
 ```
 claude-abap-skills/
-├── .claude-plugin/marketplace.json    # marketplace manifest
+├── .claude-plugin/marketplace.json    # manifest listing both plugins
 ├── clean-abap/                        # Plugin 1
 │   ├── .claude-plugin/plugin.json
 │   ├── CLAUDE.md                      # universal Clean ABAP rule set

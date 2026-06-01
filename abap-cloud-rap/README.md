@@ -1,6 +1,6 @@
 # `abap-cloud-rap` plugin
 
-ABAP Cloud / RAP rules and three skills for Claude Code. Part of the [claude-abap-skills](../README.md) marketplace.
+ABAP Cloud / RAP rules and three skills for Claude Code. One of two plugins in the [claude-abap-skills](../README.md) repo (the other is [`clean-abap`](../clean-abap/README.md) — independent).
 
 ```bash
 claude plugin install abap-cloud-rap@claude-abap-skills
