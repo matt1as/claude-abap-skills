@@ -4,19 +4,19 @@
     "name": "Mattias Johansson",
     "url": "https://github.com/matt1as"
   },
-  "description": "Opinionated skill library for Claude Code targeting modern ABAP development — BTP ABAP Environment and S/4HANA 2023+ in the ABAP Cloud development model. Two independent plugins: clean-abap (universal Clean ABAP rules) and abap-cloud-rap (clean core, RAP behavior design, CDS layering, ATC remediation). Install one or both — they do not load each other at runtime. Assumes the official SAP ABAP MCP Server (SAPSE.adt-vscode) provides system access.",
+  "description": "Opinionated skill library for Claude Code targeting modern ABAP development — BTP ABAP Environment and S/4HANA on-prem in the ABAP Cloud development model. Two independent plugins: clean-abap (universal Clean ABAP rules) and abap-cloud-rap (clean core, RAP behavior design, CDS layering, ATC remediation). Install one or both — they do not load each other at runtime. Assumes the official SAP ABAP MCP Server (SAPSE.adt-vscode) provides system access.",
   "homepage": "https://github.com/matt1as/claude-abap-skills",
   "repository": "https://github.com/matt1as/claude-abap-skills",
   "metadata": {
-    "description": "5 ABAP skills across 2 independent plugins. Targets BTP ABAP Environment and S/4HANA 2023+ in ABAP Cloud development model. Not for ECC, pre-2023 on-prem, or classic ABAP.",
-    "version": "0.2.2"
+    "description": "5 ABAP skills across 2 independent plugins. Targets BTP ABAP Environment and S/4HANA on-prem in the ABAP Cloud development model. Not for ECC or classic non-Cloud ABAP.",
+    "version": "0.2.3"
   },
   "plugins": [
     {
       "name": "clean-abap",
       "source": "./clean-abap",
-      "description": "Universal Clean ABAP rules plus two skills: review and refactor. Skills load the rule set from CLAUDE.md on invocation — no always-on context cost beyond skill descriptions. Targets modern ABAP only — BTP ABAP Environment or S/4HANA 2023+ in the ABAP Cloud development model.",
-      "version": "0.2.2",
+      "description": "Universal Clean ABAP rules plus two skills: review and refactor. Skills load the rule set from CLAUDE.md on invocation — no always-on context cost beyond skill descriptions. Targets modern ABAP only — BTP ABAP Environment or S/4HANA on-prem in the ABAP Cloud development model.",
+      "version": "0.2.3",
       "author": { "name": "Mattias Johansson" },
       "keywords": [
         "abap",
@@ -32,8 +32,8 @@
     {
       "name": "abap-cloud-rap",
       "source": "./abap-cloud-rap",
-      "description": "ABAP Cloud / RAP overlay plus three skills: rap-bo-design (build a full RAP BO via the official SAP ADT MCP generators), atc-remediation (walk ATC findings methodically), clean-core-check (audit clean core compliance). Self-contained; install the clean-abap plugin separately if you also want the universal Clean ABAP review and refactor skills. Targets BTP ABAP Environment and S/4HANA 2023+ in the ABAP Cloud development model.",
-      "version": "0.2.2",
+      "description": "ABAP Cloud / RAP overlay plus three skills: rap-bo-design (build a full RAP BO via the official SAP ADT MCP generators), atc-remediation (walk ATC findings methodically), clean-core-check (audit clean core compliance). Self-contained; install the clean-abap plugin separately if you also want the universal Clean ABAP review and refactor skills. Targets BTP ABAP Environment and S/4HANA on-prem in the ABAP Cloud development model.",
+      "version": "0.2.3",
       "author": { "name": "Mattias Johansson" },
       "keywords": [
         "abap",

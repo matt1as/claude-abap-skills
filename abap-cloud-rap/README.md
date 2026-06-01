@@ -12,19 +12,19 @@ Independent from the [`clean-abap`](../clean-abap/README.md) plugin — install 
 
 ## What this plugin gives you
 
-- **15 ABAP Cloud / RAP rules** in [`CLAUDE.md`](CLAUDE.md), covering clean core (released APIs, no SAP-owned table reads, ABAP Cloud language scope, no SAP-standard modification), RAP behavior design (managed vs unmanaged, semantic key, draft handling, determinations/validations/side effects, action design, feature control), CDS layering (interface → projection → consumption, required annotations, no business logic in projections, composition vs association), and testing (ABAP Unit with CDS test doubles). Each rule has concrete CDS/BDEF/ABAP examples and the related ATC checks. Where BTP and S/4HANA 2023+ differ, the rule calls it out.
+- **15 ABAP Cloud / RAP rules** in [`CLAUDE.md`](CLAUDE.md), covering clean core (released APIs, no SAP-owned table reads, ABAP Cloud language scope, no SAP-standard modification), RAP behavior design (managed vs unmanaged, semantic key, draft handling, determinations/validations/side effects, action design, feature control), CDS layering (interface → projection → consumption, required annotations, no business logic in projections, composition vs association), and testing (ABAP Unit with CDS test doubles). Each rule has concrete CDS/BDEF/ABAP examples and the related ATC checks. Where BTP and S/4HANA on-prem differ, the rule calls it out.
 - **Three skills** invokable in any Claude Code session once installed:
 
 | Skill | Invoke when |
 |-------|-------------|
 | **`/abap-cloud-rap:rap-bo-design`** | The user asks to design, scaffold, generate, or create a new RAP BO, OData service, or Fiori UI service. Prefers the official SAP ADT MCP's `x-ui-service` / `ui-service` / `webapi-service` generators (creates the persistent table, draft table, CDS layers, BDEFs, behavior pool, access control, service def/binding, metadata extension in one call); falls back to hand-crafted CDS/BDEF skeletons when no generator fits. |
 | **`/abap-cloud-rap:atc-remediation`** | The user asks to fix, remediate, address, or triage ATC findings on an object, package, or transport. Groups findings by category, proposes a concrete fix per finding, refuses pseudo-comment suppressions by default. |
-| **`/abap-cloud-rap:clean-core-check`** | The user asks to audit clean core compliance, ABAP Cloud compatibility, released-API usage, or extension-point usage. Read-only. Distinguishes hard violations (never allowed in either system) from soft warnings (transitional in S/4HANA 2023+, hard in BTP). |
+| **`/abap-cloud-rap:clean-core-check`** | The user asks to audit clean core compliance, ABAP Cloud compatibility, released-API usage, or extension-point usage. Read-only. Distinguishes hard violations (never allowed in either system) from soft warnings (transitional in S/4HANA on-prem, hard in BTP). |
 
 ## Scope — targets and out-of-scope
 
-- **Supported:** SAP BTP ABAP Environment, SAP S/4HANA 2023+ in the ABAP Cloud development model
-- **Not supported:** SAP ECC, classic (non-Cloud) development model, pre-2023 on-prem S/4HANA, classic dynpro / SUBMIT / FORM / unreleased FMs / direct SAP-table SELECTs
+- **Supported:** SAP BTP ABAP Environment, SAP S/4HANA on-prem in the ABAP Cloud development model
+- **Not supported:** SAP ECC, classic (non-Cloud) development model, classic dynpro / SUBMIT / FORM / unreleased FMs / direct SAP-table SELECTs
 
 This plugin **enforces** clean core. It will not generate code that violates it. PRs adding content for unsupported scopes will be closed — see [`CONTRIBUTING.md`](../CONTRIBUTING.md).
 
@@ -50,6 +50,8 @@ This plugin assumes the **official SAP ABAP MCP Server** (in `SAPSE.adt-vscode`)
 - ATC results (affects `atc-remediation` — paste-only today)
 
 See the top-level [README — Known limitations](../README.md#known-limitations-of-the-official-adt-mcp) and the per-skill MCP caveats inside each SKILL.md.
+
+The official MCP is tagged `"experimental"` and its capability set is expected to grow. Once source reads and an ATC tool land, `clean-core-check` and `atc-remediation` move from paste-only to live MCP calls without any change to the skill contracts.
 
 ### `MCP_TIMEOUT`
 

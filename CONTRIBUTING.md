@@ -11,7 +11,7 @@ This is a **high quality, opinionated, enforced rule set** for modern ABAP. It i
 - **Specific** — enforceable by an AI agent without further interpretation
 - **Actionable** — there is a concrete thing to do or avoid
 - **Justified** — there is a real consequence to ignoring the rule
-- **Modern** — applies to BTP ABAP Environment or S/4HANA 2023+ in ABAP Cloud development model
+- **Modern** — applies to BTP ABAP Environment or S/4HANA on-prem in ABAP Cloud development model
 
 Vague advice ("write clean code", "use OOP") does not belong here.
 
@@ -34,7 +34,7 @@ Rules that cannot meet this bar should be rejected. If a rule is real but cannot
 - ABAP must use modern syntax: inline `DATA(...)`, string templates, `VALUE #( )`, `NEW`, class-based exceptions
 - CDS must be **ABAP CDS** syntax (DDL source code, not HANA Calculation View XML)
 - BDEF must use **RAP BDEF** syntax (`managed implementation in class ... unique`, etc.)
-- Where BTP and S/4HANA 2023+ differ, **call it out explicitly** — never silently pick one
+- Where BTP and S/4HANA on-prem differ, **call it out explicitly** — never silently pick one
 - No pseudo-code, no `...` placeholders in the middle of an example. If the example is too long, simplify the scenario instead
 
 ---
@@ -44,7 +44,6 @@ Rules that cannot meet this bar should be rejected. If a rule is real but cannot
 This library targets **modern ABAP only**. The following are **out of scope** and PRs adding them will be closed without merge:
 
 - SAP ECC content
-- S/4HANA on-prem releases earlier than 2023
 - Classic (non-Cloud) development model content for any release
 - Classic dynpro, logical databases, SAP Query, classic batch input
 - BAPI-style transactional patterns where RAP is the modern alternative
@@ -61,7 +60,7 @@ If you believe a borderline topic belongs here, open an issue first to discuss b
 Open a GitHub issue describing:
 - The specific scenario where current guidance is missing or wrong
 - A real code example of the problem
-- Which target system it applies to (BTP, S/4HANA 2023+, or both)
+- Which target system it applies to (BTP, S/4HANA on-prem, or both)
 
 ### Proposing a new rule or skill
 
@@ -74,8 +73,8 @@ Open a GitHub issue describing:
    - [ ] Do example is real, modern ABAP / CDS / BDEF
    - [ ] Avoid example shows the specific anti-pattern
    - [ ] ATC check named if one exists
-   - [ ] System scope called out if BTP and S/4HANA 2023+ differ
-   - [ ] No additions outside scope (no ECC, no classic ABAP, no pre-2023)
+   - [ ] System scope called out if BTP and S/4HANA on-prem differ
+   - [ ] No additions outside scope (no ECC, no classic ABAP)
 
 ### Editing existing rules
 
@@ -83,7 +82,7 @@ Existing rules can be edited to:
 - Tighten the rationale
 - Improve the code examples
 - Add an ATC check reference that has since become available
-- Clarify a BTP / S/4HANA 2023+ difference
+- Clarify a BTP / S/4HANA on-prem difference
 
 Edits that **weaken** a rule (make it vaguer, remove the example, broaden it into a guideline) need an issue and discussion first.
 

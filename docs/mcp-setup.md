@@ -33,7 +33,7 @@ Install and confirm these first:
    [`SAPSE.adt-vscode`](https://marketplace.visualstudio.com/items?itemName=SAPSE.adt-vscode)
 4. Access to one supported target:
    - SAP BTP ABAP Environment
-   - SAP S/4HANA 2023 or later, developed in the ABAP Cloud model
+   - SAP S/4HANA on-prem, developed in the ABAP Cloud development model
 
 The extension supports different connection types depending on the landscape.
 For BTP ABAP Environment you normally connect over HTTPS. For on-prem or private
@@ -125,17 +125,16 @@ Replace `<TOKEN>` with the value from `adt.mcpServer.token`.
 If you rotate the token later, remove and re-add the MCP entry or update the
 stored header so Claude Code stops using the old bearer token.
 
-## Path B: S/4HANA 2023+ on-prem in the ABAP Cloud development model
+## Path B: S/4HANA on-prem in the ABAP Cloud development model
 
 ### 1. Confirm the system is in scope
 
 This repo only supports:
 
-- SAP S/4HANA 2023 or later
-- Development performed in the ABAP Cloud model
+- SAP S/4HANA on-prem releases that support the ABAP Cloud development model
+- Development performed in the ABAP Cloud development model
 
-Do not use this setup guide for ECC, pre-2023 S/4HANA, or classic unrestricted
-development.
+Do not use this setup guide for ECC or classic non-Cloud ABAP development.
 
 ### 2. Confirm the workstation prerequisites
 

@@ -1,10 +1,10 @@
 # ABAP Cloud / RAP — always-on rules
 
-System-specific, opinionated rules for the RAP programming model, clean core, and ABAP Cloud development. Applies to **BTP ABAP Environment** and **S/4HANA 2023+ in the ABAP Cloud development model**.
+System-specific, opinionated rules for the RAP programming model, clean core, and ABAP Cloud development. Applies to **BTP ABAP Environment** and **S/4HANA on-prem in the ABAP Cloud development model**.
 
 These rules are **self-contained** for the RAP and ABAP Cloud context. They do not depend on, and do not load, the companion `clean-abap` plugin's rule set at runtime. Install the `clean-abap` plugin separately if you want its universal Clean ABAP rules and skills (`/clean-abap:review`, `/clean-abap:refactor`).
 
-Where BTP and S/4HANA 2023+ behave differently, the rule calls it out explicitly.
+Where BTP and S/4HANA on-prem behave differently, the rule calls it out explicitly.
 
 When generating or reviewing code that touches CDS, BDEF, behavior implementation classes, or any object that runs in ABAP Cloud language scope, apply every rule below.
 
@@ -27,7 +27,7 @@ DATA(uuid) = cl_uuid_factory=>create_system_uuid( )->create_uuid_x16( ).
 " Unreleased internal helper — no C1 contract
 CALL FUNCTION 'GUID_CREATE' IMPORTING ev_guid_16 = DATA(guid).
 ```
-**System scope**: BTP — hard error at activation. S/4HANA 2023+ Cloud development — ATC error in the ABAP Cloud development variant.
+**System scope**: BTP — hard error at activation. S/4HANA on-prem Cloud development — ATC error in the ABAP Cloud development variant.
 **ATC**: SAP standard ATC — *Usage of released APIs* (variant `ABAP_CLOUD_DEVELOPMENT_DEFAULT`)
 
 ---
@@ -49,7 +49,7 @@ SELECT FROM vbak
        WHERE kunnr = @customer_id
        INTO TABLE @DATA(orders).
 ```
-**System scope**: BTP — hard error at activation. S/4HANA 2023+ Cloud development — ATC error.
+**System scope**: BTP — hard error at activation. S/4HANA on-prem Cloud development — ATC error.
 **ATC**: SAP standard ATC — *Released Database Tables and Views* (variant `ABAP_CLOUD_DEVELOPMENT_DEFAULT`)
 
 ---
@@ -87,7 +87,7 @@ PERFORM process_order USING order_id.
 FORM process_order USING p_order TYPE vbeln.
 ENDFORM.
 ```
-**System scope**: BTP — these constructs do not exist. S/4HANA 2023+ Cloud development — ATC error; the same source file may compile in Classic ABAP scope, which is why scope must be set per package.
+**System scope**: BTP — these constructs do not exist. S/4HANA on-prem Cloud development — ATC error; the same source file may compile in Classic ABAP scope, which is why scope must be set per package.
 **ATC**: SAP standard ATC — *ABAP Language Version: ABAP for Cloud Development* (variant `ABAP_CLOUD_DEVELOPMENT_DEFAULT`)
 
 ---
@@ -116,7 +116,7 @@ CLASS cl_sales_order_processor DEFINITION
   ...
 ENDCLASS.
 ```
-**System scope**: BTP — modification is technically impossible. S/4HANA 2023+ Cloud development — ATC blocks modifications of SAP-owned objects.
+**System scope**: BTP — modification is technically impossible. S/4HANA on-prem Cloud development — ATC blocks modifications of SAP-owned objects.
 **ATC**: SAP standard ATC — *Modification check* / *Use of released enhancement options only*
 
 ---
@@ -160,7 +160,7 @@ implementation in class zbp_r_salesorder unique
 }
 ```
 **Decision rule**: New BO on customer tables → **managed**. Wrapping a legacy BAPI / update module you cannot rewrite → **unmanaged**. There is no third option.
-**System scope**: Identical on BTP and S/4HANA 2023+.
+**System scope**: Identical on BTP and S/4HANA on-prem.
 
 ---
 
@@ -204,7 +204,7 @@ define table zsalesorder {
       ...
 }
 ```
-**System scope**: Identical on BTP and S/4HANA 2023+.
+**System scope**: Identical on BTP and S/4HANA on-prem.
 
 ---
 
@@ -254,7 +254,7 @@ lock master                       " no 'total' modifier => lock contention bugs
   " missing draft Edit/Activate/Discard/Resume/Prepare actions
 }
 ```
-**System scope**: Identical on BTP and S/4HANA 2023+.
+**System scope**: Identical on BTP and S/4HANA on-prem.
 
 ---
 
@@ -289,7 +289,7 @@ validation validate_and_set_defaults on save { create; field Customer, Quantity;
 " the operation cleanly — use a validation.
 determination reject_blocked_customer on save { create; field Customer; }
 ```
-**System scope**: Identical on BTP and S/4HANA 2023+.
+**System scope**: Identical on BTP and S/4HANA on-prem.
 
 ---
 
@@ -324,7 +324,7 @@ define behavior for ZR_SalesOrder alias SalesOrder
   action CleanupOldDrafts result [0..0];   " should be static
 }
 ```
-**System scope**: Identical on BTP and S/4HANA 2023+.
+**System scope**: Identical on BTP and S/4HANA on-prem.
 
 ---
 
@@ -377,7 +377,7 @@ field ( features : instance ) SalesOrderUUID;
 " the UI will permanently show the field as read-only even when it should be editable.
 field ( readonly ) Customer;
 ```
-**System scope**: Identical on BTP and S/4HANA 2023+.
+**System scope**: Identical on BTP and S/4HANA on-prem.
 
 ---
 
@@ -452,7 +452,7 @@ define view entity ZC_SalesOrder_EVERYTHING
       SalesOrder.netwr                                                      as NetAmount
 }
 ```
-**System scope**: Identical on BTP and S/4HANA 2023+.
+**System scope**: Identical on BTP and S/4HANA on-prem.
 
 ---
 
@@ -489,7 +489,7 @@ define view entity ZI_SalesOrder
       Customer
 }
 ```
-**System scope**: Identical on BTP and S/4HANA 2023+. `@AbapCatalog.sqlViewName` is **not** used on view entities — it belongs to legacy DDL views (`define view`), which are forbidden in ABAP Cloud. Always use `define view entity`.
+**System scope**: Identical on BTP and S/4HANA on-prem. `@AbapCatalog.sqlViewName` is **not** used on view entities — it belongs to legacy DDL views (`define view`), which are forbidden in ABAP Cloud. Always use `define view entity`.
 **ATC**: SAP standard ATC — *CDS: Mandatory annotations*
 
 ---
@@ -536,7 +536,7 @@ define root view entity ZR_SalesOrder
         target_currency => cast( 'EUR' as abap.cuky ) ) as GrossAmountEUR
 }
 ```
-**System scope**: Identical on BTP and S/4HANA 2023+.
+**System scope**: Identical on BTP and S/4HANA on-prem.
 
 ---
 
@@ -586,7 +586,7 @@ define view entity ZI_SalesOrder
       _Customer
 }
 ```
-**System scope**: Identical on BTP and S/4HANA 2023+.
+**System scope**: Identical on BTP and S/4HANA on-prem.
 
 ---
 
@@ -682,4 +682,4 @@ METHOD reject_unknown_customer.
   ...
 ENDMETHOD.
 ```
-**System scope**: Identical on BTP and S/4HANA 2023+. The CDS test double framework (`cl_cds_test_environment`) is available on both.
+**System scope**: Identical on BTP and S/4HANA on-prem. The CDS test double framework (`cl_cds_test_environment`) is available on both.

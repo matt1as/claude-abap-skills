@@ -1,6 +1,6 @@
 ---
 name: review
-description: Review existing ABAP code against the Clean ABAP rule set in ../CLAUDE.md (loaded on invocation). Use when the user asks to review, audit, or check ABAP for clean-code violations — magic numbers, naming, method shape, error handling, table reads, classes, etc. Outputs a structured report grouped by severity, ATC-checkable findings first. Targets modern ABAP only — BTP ABAP Environment or S/4HANA 2023+ in the ABAP Cloud development model.
+description: Review existing ABAP code against the Clean ABAP rule set in ../CLAUDE.md (loaded on invocation). Use when the user asks to review, audit, or check ABAP for clean-code violations — magic numbers, naming, method shape, error handling, table reads, classes, etc. Outputs a structured report grouped by severity, ATC-checkable findings first. Targets modern ABAP only — BTP ABAP Environment or S/4HANA on-prem in the ABAP Cloud development model.
 license: Apache-2.0
 ---
 

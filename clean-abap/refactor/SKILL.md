@@ -1,6 +1,6 @@
 ---
 name: refactor
-description: Refactor existing ABAP code to Clean ABAP style without changing behavior. Use when the user asks to refactor, clean up, modernize, or tidy ABAP code. Applies the rule set in ../CLAUDE.md in deterministic passes (naming, declaration, expression, method shape, error, class) and asks before writing back via MCP. Targets modern ABAP only — BTP ABAP Environment or S/4HANA 2023+ in the ABAP Cloud development model.
+description: Refactor existing ABAP code to Clean ABAP style without changing behavior. Use when the user asks to refactor, clean up, modernize, or tidy ABAP code. Applies the rule set in ../CLAUDE.md in deterministic passes (naming, declaration, expression, method shape, error, class) and asks before writing back via MCP. Targets modern ABAP only — BTP ABAP Environment or S/4HANA on-prem in the ABAP Cloud development model.
 license: Apache-2.0
 ---
 
