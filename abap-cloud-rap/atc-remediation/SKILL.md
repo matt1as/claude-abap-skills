@@ -1,10 +1,16 @@
-# /abap-cloud-rap:atc-remediation
+---
+name: atc-remediation
+description: Walk through ATC (ABAP Test Cockpit) violations methodically, grouped by category, with concrete fixes per finding. Use when the user asks to fix, remediate, address, or triage ATC findings on an ABAP object, package, or transport. Refuses pseudo-comment suppressions by default and re-runs ATC after each batch. Applies rules from ../CLAUDE.md (and ../../clean-abap/CLAUDE.md when that plugin is installed). Targets modern ABAP — BTP ABAP Environment and S/4HANA 2023+ in the ABAP Cloud development model.
+license: Apache-2.0
+---
+
+# abap-cloud-rap:atc-remediation
 
 Walk through ATC violations from the connected ABAP system and fix them methodically, grouped by category, with an explanation per finding.
 
 ## What this command does
 
-You are pulling ATC (ABAP Test Cockpit) results from the system via the SAP ABAP MCP Server, grouping them by check category, and proposing a concrete fix for each — applying the rules from `skills/clean-abap/AGENTS.md` and `skills/abap-cloud-rap/AGENTS.md`. Pseudo-comment suppressions are off-limits unless the user explicitly justifies and approves them.
+You are pulling ATC (ABAP Test Cockpit) results from the system via the SAP ABAP MCP Server, grouping them by check category, and proposing a concrete fix for each — applying the rules from `../../clean-abap/CLAUDE.md` and `../CLAUDE.md`. Pseudo-comment suppressions are off-limits unless the user explicitly justifies and approves them.
 
 ## Inputs to collect
 
@@ -30,7 +36,7 @@ Also ask which check variant to run against, defaulting to **`ABAP_CLOUD_DEVELOP
 3. **For each finding, in priority order (Cloud compatibility → Security → Performance → Code quality → CDS/RAP → Testing):**
    - State the violation in one sentence
    - Cite the ATC check name and severity
-   - Identify the root cause — name the rule from `AGENTS.md` that applies
+   - Identify the root cause — name the rule from `CLAUDE.md` that applies
    - Show the fix as a Before/After code snippet
    - Propose the action: **auto-apply**, **ask before applying**, or **manual only** (see severity ladder below)
 4. **Severity ladder for auto-apply decisions:**
@@ -64,7 +70,7 @@ Total findings: <N>
 #### F-001 — <one-line violation>
 - **Object:** <name> line <N>
 - **ATC check:** <check name> — severity <error|warning|info>
-- **Root cause rule:** <rule-name from AGENTS.md>
+- **Root cause rule:** <rule-name from CLAUDE.md>
 - **Before:**
 ` ` `abap
 <offending code>

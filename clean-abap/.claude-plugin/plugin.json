@@ -1,0 +1,13 @@
+{
+  "name": "clean-abap",
+  "description": "Universal Clean ABAP rules plus /clean-abap:review and /clean-abap:refactor skills. The rule set in CLAUDE.md auto-loads when the plugin is enabled. Targets modern ABAP only — BTP ABAP Environment or S/4HANA 2023+ in the ABAP Cloud development model.",
+  "version": "0.2.0",
+  "author": {
+    "name": "Mattias Johansson",
+    "url": "https://github.com/matt1as"
+  },
+  "homepage": "https://github.com/matt1as/claude-abap-skills/tree/main/clean-abap",
+  "repository": "https://github.com/matt1as/claude-abap-skills",
+  "license": "Apache-2.0",
+  "skills": "./"
+}

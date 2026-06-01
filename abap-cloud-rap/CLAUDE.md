@@ -2,7 +2,7 @@
 
 System-specific, opinionated rules for the RAP programming model, clean core, and ABAP Cloud development. Applies to **BTP ABAP Environment** and **S/4HANA 2023+ in the ABAP Cloud development model**.
 
-This layer is loaded **in addition to** `skills/clean-abap/AGENTS.md`. Clean ABAP rules apply first; the rules below refine and extend them for the RAP and ABAP Cloud context. Where BTP and S/4HANA 2023+ behave differently, the rule calls it out explicitly.
+This layer is loaded **in addition to** the `clean-abap` plugin's `CLAUDE.md`. Clean ABAP rules apply first; the rules below refine and extend them for the RAP and ABAP Cloud context. Where BTP and S/4HANA 2023+ behave differently, the rule calls it out explicitly.
 
 When generating or reviewing code that touches CDS, BDEF, behavior implementation classes, or any object that runs in ABAP Cloud language scope, apply every rule below.
 

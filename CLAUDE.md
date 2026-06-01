@@ -1,9 +1,11 @@
 # claude-abap-skills
 
-This repository is a **skill library for Claude Code** working with modern ABAP development. It does not contain any MCP server code — it contains the rules, prompt templates, and slash commands that turn raw model output into **production-quality modern ABAP**.
+This repository is a **Claude Code marketplace** that ships two plugins for modern ABAP development. It does not contain any MCP server code — it contains the rules, prompt templates, and slash commands that turn raw model output into **production-quality modern ABAP**.
 
 > The official SAP ABAP MCP Server (`SAPSE.adt-vscode`) gives Claude **hands and eyes** into the system.
 > This library gives Claude the **brain**: how to write good code, not just what to access.
+
+This file describes the library for anyone working **on** it. End users install the plugins via the marketplace — see `README.md`.
 
 ---
 
@@ -20,7 +22,7 @@ Everything in this library assumes those two scopes. The guidance is opinionated
 
 ## Out of scope — never suggest
 
-When working with this skill library, **never** generate code, refactorings, or recommendations that depend on any of the following:
+When working with this library, **never** generate code, refactorings, or recommendations that depend on any of the following:
 
 - SAP ECC
 - Classic non-Cloud ABAP development model (e.g. on-prem stacks before 2023)
@@ -45,30 +47,45 @@ All system access (read object source, write source, run ATC, run unit tests, br
 - When you write code back to the system, do it via the MCP and confirm changes succeeded
 - For setup instructions, see `docs/mcp-setup.md`
 
+Known MCP limitations at the time of writing (`SAPSE.adt-vscode` 1.0):
+- No object-source read tool — the source of an existing class/CDS/BDEF cannot be fetched
+- No repository search
+- No ATC tool
+
+Skills that need read access (review, refactor, atc-remediation, clean-core-check) currently work on **pasted** source.
+
 ---
 
-## How to load this skill library
+## Repository layout
 
-Claude Code automatically loads any `AGENTS.md` file in active skill directories. This library exposes two always-on layers:
+```
+claude-abap-skills/                          # marketplace root
+├── .claude-plugin/
+│   └── marketplace.json                     # lists both plugins
+├── CLAUDE.md                                # this file
+├── README.md                                # install instructions
+├── LICENSE                                  # Apache 2.0
+├── CONTRIBUTING.md
+├── docs/mcp-setup.md
+├── clean-abap/                              # Plugin 1
+│   ├── .claude-plugin/plugin.json
+│   ├── CLAUDE.md                            # universal Clean ABAP rule set
+│   ├── review/SKILL.md                      # /clean-abap:review
+│   └── refactor/SKILL.md                    # /clean-abap:refactor
+└── abap-cloud-rap/                          # Plugin 2
+    ├── .claude-plugin/plugin.json
+    ├── CLAUDE.md                            # RAP / ABAP Cloud overlay rule set
+    ├── rap-bo-design/SKILL.md               # /abap-cloud-rap:rap-bo-design
+    ├── atc-remediation/SKILL.md             # /abap-cloud-rap:atc-remediation
+    └── clean-core-check/SKILL.md            # /abap-cloud-rap:clean-core-check
+```
 
-### Layer 1 — Clean ABAP base
-`skills/clean-abap/AGENTS.md`
+### How rules reach a skill at runtime
 
-Universal rules from the SAP Clean ABAP styleguide, distilled into AI-enforceable form. **Always loaded** for any ABAP work.
+Each plugin's `CLAUDE.md` holds the **rule set**. It is **not** auto-loaded by Claude Code (the validator warns about this — by design). Each `SKILL.md` is responsible for explicitly reading the rule files it needs:
 
-Slash commands:
-- `/clean-abap:review` — review existing code against the Clean ABAP rules
-- `/clean-abap:refactor` — refactor existing code to Clean ABAP style
-
-### Layer 2 — ABAP Cloud / RAP overlay
-`skills/abap-cloud-rap/AGENTS.md`
-
-System-specific, opinionated rules for the RAP programming model, clean core, and ABAP Cloud development. **Always loaded** in addition to Layer 1.
-
-Slash commands:
-- `/abap-cloud-rap:rap-bo-design` — design a new RAP business object end-to-end
-- `/abap-cloud-rap:atc-remediation` — fix ATC violations methodically
-- `/abap-cloud-rap:clean-core-check` — verify clean core compliance of an object or package
+- `clean-abap` skills read `../CLAUDE.md` (their own plugin's rules)
+- `abap-cloud-rap` skills read `../CLAUDE.md` (their overlay) plus `../../clean-abap/CLAUDE.md` (the Clean ABAP base, when both plugins are installed side-by-side in the marketplace)
 
 The two layers compose: **Clean ABAP rules apply first**, then the Cloud/RAP overlay refines or extends them.
 
@@ -92,6 +109,12 @@ Several rules in this library differ between **BTP ABAP Environment** and **S/4H
 - Some ATC variants behave differently
 
 **If the target system is not clear from context, ask the user before generating code.** Do not silently pick one. A single sentence — "Are you targeting BTP ABAP Environment or S/4HANA 2023+ on-prem in Cloud development model?" — is always the right move when in doubt.
+
+---
+
+## Operational note — MCP_TIMEOUT
+
+The RAP generators (`x-ui-service`, `ui-service`) routinely take 60–180 s for a multi-entity BO. Claude Code's default MCP tool timeout (~30 s) is shorter, producing false "operation timed out" while the server completes. **Launch Claude Code with `MCP_TIMEOUT=600000` (10 min)** when generation is on the plan.
 
 ---
 

@@ -1,10 +1,16 @@
-# /abap-cloud-rap:clean-core-check
+---
+name: clean-core-check
+description: Check an ABAP object or package for clean core compliance — unreleased APIs, direct SELECT on SAP-owned tables, classic constructs disallowed in ABAP Cloud, modifications to SAP standard. Use when the user asks to audit, verify, or check clean core compliance, ABAP Cloud compatibility, released API usage, or extension point usage. Produces a categorised report with hard violations and soft warnings. Read-only — never writes back. Targets BTP ABAP Environment and S/4HANA 2023+ in the ABAP Cloud development model.
+license: Apache-2.0
+---
+
+# abap-cloud-rap:clean-core-check
 
 Check an ABAP object or package for clean core compliance. Pulls the source via the SAP ABAP MCP Server and produces a categorised compliance report with concrete remediation steps.
 
 ## What this command does
 
-You are auditing one or more ABAP objects for compliance with the **clean core** principles enforced by ABAP Cloud development model. The rules in `skills/abap-cloud-rap/AGENTS.md` define what is allowed; this command finds what is not. Output is a structured report — **read-only**, no writes back via MCP.
+You are auditing one or more ABAP objects for compliance with the **clean core** principles enforced by ABAP Cloud development model. The rules in `../CLAUDE.md` define what is allowed; this command finds what is not. Output is a structured report — **read-only**, no writes back via MCP.
 
 ## Inputs
 
@@ -16,7 +22,7 @@ If not provided, ask. Defaults to the narrowest scope.
 
 ## What to check
 
-For each object in scope, look for the following. Each maps to a rule in `AGENTS.md`.
+For each object in scope, look for the following. Each maps to a rule in `CLAUDE.md`.
 
 ### Hard violations — never allowed in either BTP or S/4HANA 2023+ Cloud development
 
@@ -69,7 +75,7 @@ Soft warnings: <N>
 #### HV-001 — <one-line violation>
 - **Where:** <file> line <N>
 - **Check:** <check name from the hard table above>
-- **Rule:** <rule-name from AGENTS.md>
+- **Rule:** <rule-name from CLAUDE.md>
 - **Found:**
 ` ` `abap
 <offending code>
@@ -106,4 +112,4 @@ Soft warnings: <N>
 - **Always show a concrete remediation.** A finding without a fix is not useful.
 - **For field-name migrations (e.g. `vbak.vbeln → I_SalesOrder.SalesOrder`), list every renamed field used in the surrounding code** — not just the table swap. Half a migration is worse than none.
 - **Pseudo-comment suppression is not a remediation.** If the user wants to ignore a finding, they should justify it through `/abap-cloud-rap:atc-remediation`, not here.
-- **Do not include findings that have no rule in `AGENTS.md`.** This is a compliance check against the library, not a free-form code review.
+- **Do not include findings that have no rule in `CLAUDE.md`.** This is a compliance check against the library, not a free-form code review.

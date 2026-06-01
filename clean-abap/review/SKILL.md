@@ -1,6 +1,12 @@
-# /clean-abap:review
+---
+name: review
+description: Review existing ABAP code against the Clean ABAP rule set (auto-loaded as ../CLAUDE.md when this plugin is invoked). Use when the user asks to review, audit, or check ABAP for clean-code violations — magic numbers, naming, method shape, error handling, table reads, classes, etc. Outputs a structured report grouped by severity, ATC-checkable findings first. Targets modern ABAP only — BTP ABAP Environment or S/4HANA 2023+ in the ABAP Cloud development model.
+license: Apache-2.0
+---
 
-Review existing ABAP code against the Clean ABAP rules in `skills/clean-abap/AGENTS.md`.
+# clean-abap:review
+
+Review existing ABAP code against the Clean ABAP rule set in `../CLAUDE.md` (relative to this skill's directory).
 
 ## What this command does
 
@@ -16,7 +22,7 @@ Accept any of the following. If none are provided, ask the user which they want.
 
 ## Procedure
 
-1. **Load the rule set.** Read every rule under `## RULE:` in `skills/clean-abap/AGENTS.md`. These are the only rules in scope for this review.
+1. **Load the rule set.** Read every rule under `## RULE:` in `../CLAUDE.md`. These are the only rules in scope for this review.
 2. **Fetch the source via MCP** if it was not pasted inline. Do not ask the user to paste code that the MCP can read.
 3. **Scan the source against every rule.** Record each violation with: the rule name, the exact line or block in the source, and a one-sentence diagnosis.
 4. **Prioritise ATC-checkable violations first.** Rules with an `**ATC**:` line in the rule set are objectively flaggable by a tool — those go to the top of the report. Rules without an ATC reference are still valid findings but are lower priority.
@@ -67,8 +73,8 @@ Use this exact structure. One section per object reviewed.
 
 ## Hard rules for this command
 
-- **Cite the rule by name.** Every finding starts with `## RULE: <name>` from `AGENTS.md`. No findings without a rule.
-- **Do not invent rules.** If something feels off but is not covered by a rule in `AGENTS.md`, mention it in a single "Out of scope observations" section at the very end — not in the main report.
+- **Cite the rule by name.** Every finding starts with `## RULE: <name>` from `CLAUDE.md`. No findings without a rule.
+- **Do not invent rules.** If something feels off but is not covered by a rule in `CLAUDE.md`, mention it in a single "Out of scope observations" section at the very end — not in the main report.
 - **Do not modify the source.** Read-only.
 - **Do not skip rules to be polite.** A real review names everything; the severity scale handles the noise.
 - **One report per object.** If reviewing a package, produce one report per object and a single summary table at the end with totals per object.

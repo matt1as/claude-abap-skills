@@ -1,10 +1,16 @@
-# /abap-cloud-rap:rap-bo-design
+---
+name: rap-bo-design
+description: Design a complete RAP business object end-to-end and create it via the official SAP ABAP MCP. Use when the user asks to design, scaffold, generate, or create a new RAP BO, OData service, Fiori UI service, or RAP managed/unmanaged behavior. Prefers the MCP x-ui-service / ui-service / webapi-service generators; falls back to hand-crafted CDS/BDEF skeletons when no generator fits. Applies the ABAP Cloud / RAP overlay rules in ../CLAUDE.md (and the Clean ABAP base rules in ../../clean-abap/CLAUDE.md when that plugin is installed). Targets BTP ABAP Environment and S/4HANA 2023+ in the ABAP Cloud development model.
+license: Apache-2.0
+---
+
+# abap-cloud-rap:rap-bo-design
 
 Design a new RAP business object end-to-end and create it via the SAP ABAP MCP Server.
 
 ## What this command does
 
-You are designing a complete RAP business object from a short spec, then creating it in the connected ABAP system. The official ADT MCP Server (in `SAPSE.adt-vscode`) exposes three RAP **generators** that bootstrap a conformant stack in one call — that is the primary path. You then validate the generated stack against the rules in `skills/clean-abap/AGENTS.md` and `skills/abap-cloud-rap/AGENTS.md` and refine it.
+You are designing a complete RAP business object from a short spec, then creating it in the connected ABAP system. The official ADT MCP Server (in `SAPSE.adt-vscode`) exposes three RAP **generators** that bootstrap a conformant stack in one call — that is the primary path. You then validate the generated stack against the rules in `../../clean-abap/CLAUDE.md` and `../CLAUDE.md` and refine it.
 
 The "hand-crafted skeleton" path is a **fallback** for cases the generators do not fit.
 
@@ -53,7 +59,7 @@ Call `mcp__abap-adt__abap_generators-get_schema` for the chosen generator. The s
 - `businessEntities` — one entry per entity, with `entityName`, `compositionParent` (if a child), `compositionCardinality`
 - `businessEntitiesFields` — one entry per entity, with the field list
 
-Apply the rules in `AGENTS.md` while building the spec:
+Apply the rules in `CLAUDE.md` while building the spec:
 - **`semantic-key-alongside-technical-uuid`** — at least one field per entity must have `isSemanticKey: true`. The generator adds the technical UUID key automatically.
 - **`composition-for-children-association-for-references`** — declare child entities with `compositionCardinality` `toOne` or `toMany`; reference data goes via associations in the post-generation refinement, not as composition.
 - For amounts and quantities — link `currencyCode` / `unitOfMeasure` to the appropriate currency or UoM field on the same entity.
@@ -86,7 +92,7 @@ Each is then created via `mcp__abap-adt__abap_creation-create_object` after `aba
 
 ## Post-generation review
 
-Apply the rules from `AGENTS.md` to whatever the generator produced. The generator emits a conformant skeleton, but the rules are stricter than the defaults.
+Apply the rules from `CLAUDE.md` to whatever the generator produced. The generator emits a conformant skeleton, but the rules are stricter than the defaults.
 
 Check, in order:
 
@@ -158,7 +164,7 @@ Flag every gap in the output report. Do not silently fix issues that change sema
 - **Always include `sessionId`** from the schema response in the generation spec — verbatim.
 - **Set `MCP_TIMEOUT=600000` (10 min) before launching Claude Code** when generation is on the plan. A 30 s client timeout against a 2 min server operation looks like a failure but is not.
 - **Names come from the generation response, not the spec.** The generator adds suffixes (`_01`) and infixes (`UI`) that are not in the input. If the response is missing, recover via `fetch_services` with the conventional binding name pattern, never invent names downstream.
-- **Apply every rule from both AGENTS.md files** in the post-generation review.
+- **Apply every rule from both CLAUDE.md files (this plugin's, and clean-abap's if installed)** in the post-generation review.
 - **Always emit a semantic key field** for every entity, regardless of whether the spec explicitly mentioned it.
 - **Always include `strict ( 2 );` in the BDEF** — add it post-generation if missing.
 - **Never propose `unmanaged` for a new BO on new tables.** The generators do not even offer it.

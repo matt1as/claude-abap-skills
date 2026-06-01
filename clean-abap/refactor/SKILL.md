@@ -1,6 +1,12 @@
-# /clean-abap:refactor
+---
+name: refactor
+description: Refactor existing ABAP code to Clean ABAP style without changing behavior. Use when the user asks to refactor, clean up, modernize, or tidy ABAP code. Applies the rule set in ../CLAUDE.md in deterministic passes (naming, declaration, expression, method shape, error, class) and asks before writing back via MCP. Targets modern ABAP only — BTP ABAP Environment or S/4HANA 2023+ in the ABAP Cloud development model.
+license: Apache-2.0
+---
 
-Refactor existing ABAP code to conform to the Clean ABAP rules in `skills/clean-abap/AGENTS.md`.
+# clean-abap:refactor
+
+Refactor existing ABAP code to conform to the Clean ABAP rule set in `../CLAUDE.md` (relative to this skill's directory).
 
 ## What this command does
 
@@ -16,7 +22,7 @@ Accept any of the following. If nothing is provided, ask which target the user w
 
 ## Procedure
 
-1. **Load the rule set.** Read every `## RULE:` block in `skills/clean-abap/AGENTS.md`. Those are the only refactoring targets.
+1. **Load the rule set.** Read every `## RULE:` block in `../CLAUDE.md`. Those are the only refactoring targets.
 2. **Fetch the source via MCP** if not pasted inline. Never ask the user to paste code that the MCP can read.
 3. **Run the review first.** Internally, perform the same analysis as `/clean-abap:review`. Use the prioritised list as your refactor plan.
 4. **Refactor in passes**, in this order. Do not skip ahead:

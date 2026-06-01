@@ -1,0 +1,55 @@
+{
+  "name": "claude-abap-skills",
+  "owner": {
+    "name": "Mattias Johansson",
+    "url": "https://github.com/matt1as"
+  },
+  "description": "Opinionated skill library for Claude Code targeting modern ABAP development — BTP ABAP Environment and S/4HANA 2023+ in the ABAP Cloud development model. Two layers: Clean ABAP universal rules + ABAP Cloud / RAP overlay (clean core, RAP behavior design, CDS layering, ATC remediation). Assumes the official SAP ABAP MCP Server (SAPSE.adt-vscode) provides system access.",
+  "homepage": "https://github.com/matt1as/claude-abap-skills",
+  "repository": "https://github.com/matt1as/claude-abap-skills",
+  "metadata": {
+    "description": "5 ABAP skills across 2 plugins. Targets BTP ABAP Environment and S/4HANA 2023+ in ABAP Cloud development model. Not for ECC, pre-2023 on-prem, or classic ABAP.",
+    "version": "0.2.0"
+  },
+  "plugins": [
+    {
+      "name": "clean-abap",
+      "source": "./clean-abap",
+      "description": "Universal Clean ABAP rules (auto-loaded) plus two skills: review and refactor. Targets modern ABAP only — BTP ABAP Environment or S/4HANA 2023+ in the ABAP Cloud development model.",
+      "version": "0.2.0",
+      "author": { "name": "Mattias Johansson" },
+      "keywords": [
+        "abap",
+        "clean-abap",
+        "claude-code",
+        "modern-abap",
+        "code-review",
+        "refactoring",
+        "sap"
+      ],
+      "category": "development"
+    },
+    {
+      "name": "abap-cloud-rap",
+      "source": "./abap-cloud-rap",
+      "description": "ABAP Cloud / RAP overlay (auto-loaded rules) plus three skills: rap-bo-design (build a full RAP BO via the official SAP ADT MCP generators), atc-remediation (walk ATC findings methodically), clean-core-check (audit clean core compliance). Best paired with the clean-abap plugin. Targets BTP ABAP Environment and S/4HANA 2023+ in the ABAP Cloud development model.",
+      "version": "0.2.0",
+      "author": { "name": "Mattias Johansson" },
+      "keywords": [
+        "abap",
+        "abap-cloud",
+        "rap",
+        "claude-code",
+        "sap",
+        "s4hana",
+        "btp",
+        "cds",
+        "fiori",
+        "odata",
+        "clean-core",
+        "atc"
+      ],
+      "category": "development"
+    }
+  ]
+}
