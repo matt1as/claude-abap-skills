@@ -16,9 +16,11 @@ You are refactoring ABAP source code to bring it into compliance with the Clean 
 
 Accept any of the following. If nothing is provided, ask which target the user wants.
 
-- A code block pasted into the conversation
-- An ABAP object name (class, function group, program, include) — fetch the source via the SAP ABAP MCP Server
-- A package name — refactor object by object, never as a single bulk change
+- A code block pasted into the conversation (the most reliable path today)
+- An ABAP object name — only works if a community MCP exposes source reads. The official `SAPSE.adt-vscode` 1.0 MCP does not.
+- A package name — only works with a community MCP that exposes repository search and source reads. Refactor object by object, never as a single bulk change.
+
+If only the official MCP is connected, ask the user to paste the source from ADT in VS Code; then paste the refactored version back manually.
 
 ## Procedure
 

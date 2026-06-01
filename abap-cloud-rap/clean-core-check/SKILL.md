@@ -48,7 +48,7 @@ For each object in scope, look for the following. Each maps to a rule in `CLAUDE
 
 ## Procedure
 
-1. **Fetch the object(s) via MCP.** Class source, BDEF source, CDS DDL, include sources — everything in scope.
+1. **Get the source.** The official `SAPSE.adt-vscode` 1.0 MCP does **not** expose object-source reads, so ask the user to paste the source inline (from ADT in VS Code) or attach a community MCP that exposes reads. Do not paraphrase or imagine source code.
 2. **For each object, walk the hard checks.** Record every hit with: object, line/element, check name, root-cause rule, and a concrete remediation.
 3. **Then walk the soft checks** for objects targeting S/4HANA 2023+. Skip soft checks if the target is BTP — every soft finding is hard there.
 4. **For every finding, propose a concrete fix.** Examples:

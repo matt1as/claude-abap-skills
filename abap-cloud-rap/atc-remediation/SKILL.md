@@ -1,6 +1,6 @@
 ---
 name: atc-remediation
-description: Walk through ATC (ABAP Test Cockpit) violations methodically, grouped by category, with concrete fixes per finding. Use when the user asks to fix, remediate, address, or triage ATC findings on an ABAP object, package, or transport. Refuses pseudo-comment suppressions by default and re-runs ATC after each batch. Applies rules from ../CLAUDE.md (and ../../clean-abap/CLAUDE.md when that plugin is installed). Targets modern ABAP — BTP ABAP Environment and S/4HANA 2023+ in the ABAP Cloud development model.
+description: Walk through ATC (ABAP Test Cockpit) violations methodically, grouped by category, with concrete fixes per finding. Use when the user asks to fix, remediate, address, or triage ATC findings on an ABAP object, package, or transport. Refuses pseudo-comment suppressions by default. Applies the rule set in ../CLAUDE.md (loaded on invocation). Targets modern ABAP — BTP ABAP Environment and S/4HANA 2023+ in the ABAP Cloud development model.
 license: Apache-2.0
 ---
 
@@ -10,7 +10,9 @@ Walk through ATC violations from the connected ABAP system and fix them methodic
 
 ## What this command does
 
-You are pulling ATC (ABAP Test Cockpit) results from the system via the SAP ABAP MCP Server, grouping them by check category, and proposing a concrete fix for each — applying the rules from `../../clean-abap/CLAUDE.md` and `../CLAUDE.md`. Pseudo-comment suppressions are off-limits unless the user explicitly justifies and approves them.
+You are taking ATC (ABAP Test Cockpit) results, grouping them by check category, and proposing a concrete fix for each — applying the rules in `../CLAUDE.md`. Pseudo-comment suppressions are off-limits unless the user explicitly justifies and approves them.
+
+**MCP caveat (read carefully).** The official `SAPSE.adt-vscode` 1.0 MCP does **not** expose an ATC tool. To use this skill today, the user must paste ATC results (from ADT in VS Code) inline, or attach a community MCP that exposes ATC. Do not invent ATC results from imagination.
 
 ## Inputs to collect
 

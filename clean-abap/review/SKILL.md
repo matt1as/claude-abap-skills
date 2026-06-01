@@ -1,6 +1,6 @@
 ---
 name: review
-description: Review existing ABAP code against the Clean ABAP rule set (auto-loaded as ../CLAUDE.md when this plugin is invoked). Use when the user asks to review, audit, or check ABAP for clean-code violations — magic numbers, naming, method shape, error handling, table reads, classes, etc. Outputs a structured report grouped by severity, ATC-checkable findings first. Targets modern ABAP only — BTP ABAP Environment or S/4HANA 2023+ in the ABAP Cloud development model.
+description: Review existing ABAP code against the Clean ABAP rule set in ../CLAUDE.md (loaded on invocation). Use when the user asks to review, audit, or check ABAP for clean-code violations — magic numbers, naming, method shape, error handling, table reads, classes, etc. Outputs a structured report grouped by severity, ATC-checkable findings first. Targets modern ABAP only — BTP ABAP Environment or S/4HANA 2023+ in the ABAP Cloud development model.
 license: Apache-2.0
 ---
 
@@ -16,9 +16,11 @@ You are reviewing ABAP source code for compliance with the Clean ABAP rule set. 
 
 Accept any of the following. If none are provided, ask the user which they want.
 
-- A code block pasted into the conversation
-- An ABAP object name (class, function group, program, include) — fetch the source via the SAP ABAP MCP Server
-- A package name — fetch the list of objects via MCP, then review each in turn
+- A code block pasted into the conversation (the most reliable path today)
+- An ABAP object name — only works if a community MCP exposes source reads. The official `SAPSE.adt-vscode` 1.0 MCP does not.
+- A package name — only works with a community MCP that exposes repository search. The official MCP does not.
+
+If only the official MCP is connected, ask the user to paste the source from ADT in VS Code.
 
 ## Procedure
 
