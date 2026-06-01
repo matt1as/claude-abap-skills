@@ -2,7 +2,7 @@
 
 **The official SAP ABAP MCP Server gives Claude hands. This library gives it a brain.**
 
-Two Claude Code plugins for modern ABAP development — SAP BTP ABAP Environment and S/4HANA 2023+ in the ABAP Cloud development model. They live together in this repo but are independent — install either or both.
+Two Claude Code plugins for modern ABAP development — SAP BTP ABAP Environment and S/4HANA on-prem in the ABAP Cloud development model. They live together in this repo but are independent — install either or both.
 
 ---
 
@@ -41,7 +41,7 @@ Each plugin is **independent** — install either or both. They do not load each
 ## Supported systems
 
 - **SAP BTP ABAP Environment** (Steampunk)
-- **SAP S/4HANA 2023 and later**, when developed in the **ABAP Cloud development model**
+- **SAP S/4HANA on-prem**, when developed in the **ABAP Cloud development model**
 
 Where the two diverge — released-API surface, allowed `@AbapCatalog` annotations, ATC variants — the skills call it out explicitly and ask which system you are targeting if unclear.
 
@@ -49,7 +49,6 @@ Where the two diverge — released-API surface, allowed `@AbapCatalog` annotatio
 
 - SAP ECC
 - Classic non-Cloud development model on S/4HANA (any release)
-- S/4HANA on-prem releases earlier than 2023
 - Classic dynpro, logical databases, SAP Query, classic batch input
 - BAPI-style transactional code where RAP is the modern alternative
 
@@ -61,7 +60,7 @@ PRs adding content for unsupported scopes will be closed — see `CONTRIBUTING.m
 
 1. **[Claude Code](https://docs.claude.com/en/docs/claude-code)** installed
 2. The **official SAP ABAP MCP Server**, distributed as part of the [`SAPSE.adt-vscode`](https://marketplace.visualstudio.com/items?itemName=SAPSE.adt-vscode) extension, installed and connected to your ABAP system. Enable it under VS Code settings: `adt.mcpServer.enabled: true`
-3. A target system: BTP ABAP Environment or S/4HANA 2023+ in Cloud development model
+3. A target system: BTP ABAP Environment or S/4HANA on-prem in Cloud development model
 
 See `docs/mcp-setup.md` for connection details.
 
@@ -160,6 +159,8 @@ claude-abap-skills/
 | **Run ATC**                                         | ✗ |
 
 Skills affected: `review`, `refactor`, `atc-remediation`, `clean-core-check` currently work on **pasted** source rather than MCP-fetched source. The `rap-bo-design` skill is a perfect fit and uses the generators end-to-end.
+
+**Forward-looking.** The MCP is tagged `"experimental"` in the extension manifest, which strongly suggests its capability set will grow over the next releases. When source reads, repository search, or an ATC tool ship, the affected skills will pick them up without changes to their contracts — each `SKILL.md` already says *try the MCP first, fall back to paste*. Treat the current paste-only flows as transitional, not architectural.
 
 ---
 

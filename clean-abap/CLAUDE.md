@@ -1,6 +1,6 @@
 # Clean ABAP — always-on rules
 
-Universal rules for any modern ABAP work (BTP ABAP Environment or S/4HANA 2023+ in ABAP Cloud development model). Derived from the [SAP Clean ABAP styleguide](https://github.com/SAP/styleguides/blob/main/clean-abap/CleanABAP.md), distilled into AI-enforceable form.
+Universal rules for any modern ABAP work (BTP ABAP Environment or S/4HANA on-prem in ABAP Cloud development model). Derived from the [SAP Clean ABAP styleguide](https://github.com/SAP/styleguides/blob/main/clean-abap/CleanABAP.md), distilled into AI-enforceable form.
 
 These rules apply **before** the ABAP Cloud / RAP overlay. The overlay refines and extends them — it does not relax them.
 

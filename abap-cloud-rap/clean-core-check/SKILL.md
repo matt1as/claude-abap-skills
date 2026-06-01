@@ -1,6 +1,6 @@
 ---
 name: clean-core-check
-description: Check an ABAP object or package for clean core compliance — unreleased APIs, direct SELECT on SAP-owned tables, classic constructs disallowed in ABAP Cloud, modifications to SAP standard. Use when the user asks to audit, verify, or check clean core compliance, ABAP Cloud compatibility, released API usage, or extension point usage. Produces a categorised report with hard violations and soft warnings. Read-only — never writes back. Targets BTP ABAP Environment and S/4HANA 2023+ in the ABAP Cloud development model.
+description: Check an ABAP object or package for clean core compliance — unreleased APIs, direct SELECT on SAP-owned tables, classic constructs disallowed in ABAP Cloud, modifications to SAP standard. Use when the user asks to audit, verify, or check clean core compliance, ABAP Cloud compatibility, released API usage, or extension point usage. Produces a categorised report with hard violations and soft warnings. Read-only — never writes back. Targets BTP ABAP Environment and S/4HANA on-prem in the ABAP Cloud development model.
 license: Apache-2.0
 ---
 
@@ -24,7 +24,7 @@ If not provided, ask. Defaults to the narrowest scope.
 
 For each object in scope, look for the following. Each maps to a rule in `CLAUDE.md`.
 
-### Hard violations — never allowed in either BTP or S/4HANA 2023+ Cloud development
+### Hard violations — never allowed in either BTP or S/4HANA on-prem Cloud development
 
 | Check                                                | Source rule                              |
 |------------------------------------------------------|------------------------------------------|
@@ -38,7 +38,7 @@ For each object in scope, look for the following. Each maps to a rule in `CLAUDE
 | Use of an SAP enhancement point that is not released | `no-modification-of-sap-standard`        |
 | `define view` (legacy DDL view) instead of `define view entity` | `interface-entity-required-annotations` |
 
-### Soft warnings — allowed in S/4HANA 2023+ Cloud development for transitional reasons, never allowed in BTP
+### Soft warnings — allowed in S/4HANA on-prem Cloud development for transitional reasons, never allowed in BTP
 
 | Check                                                | Note                                                        |
 |------------------------------------------------------|-------------------------------------------------------------|
@@ -50,7 +50,7 @@ For each object in scope, look for the following. Each maps to a rule in `CLAUDE
 
 1. **Get the source.** The official `SAPSE.adt-vscode` 1.0 MCP does **not** expose object-source reads, so ask the user to paste the source inline (from ADT in VS Code) or attach a community MCP that exposes reads. Do not paraphrase or imagine source code.
 2. **For each object, walk the hard checks.** Record every hit with: object, line/element, check name, root-cause rule, and a concrete remediation.
-3. **Then walk the soft checks** for objects targeting S/4HANA 2023+. Skip soft checks if the target is BTP — every soft finding is hard there.
+3. **Then walk the soft checks** for objects targeting S/4HANA on-prem. Skip soft checks if the target is BTP — every soft finding is hard there.
 4. **For every finding, propose a concrete fix.** Examples:
    - Direct `SELECT vbak` → "use released `I_SalesOrder`; field `VBELN` becomes `SalesOrder`, `NETWR` becomes `TotalNetAmount`"
    - Unreleased FM call → "use released class `<X>` instead; signature: `<methods>`"
@@ -63,7 +63,7 @@ For each object in scope, look for the following. Each maps to a rule in `CLAUDE
 ```
 # Clean Core Compliance Report — <SCOPE>
 
-Target system: BTP | S/4HANA 2023+
+Target system: BTP | S/4HANA on-prem
 Objects audited: <N>
 Hard violations: <N>
 Soft warnings: <N>
@@ -88,7 +88,7 @@ Soft warnings: <N>
 
 (repeat per finding)
 
-## Soft warnings (S/4HANA 2023+ only)
+## Soft warnings (S/4HANA on-prem only)
 (Same structure as hard violations; only emitted when target is S/4HANA on-prem.)
 
 ## Summary

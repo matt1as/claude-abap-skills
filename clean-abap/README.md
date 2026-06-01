@@ -20,8 +20,8 @@ claude plugin install clean-abap@claude-abap-skills
 
 ## Scope — targets and out-of-scope
 
-- **Supported:** SAP BTP ABAP Environment, SAP S/4HANA 2023+ in the ABAP Cloud development model
-- **Not supported:** SAP ECC, classic (non-Cloud) development model on any release, S/4HANA on-prem before 2023, classic dynpro
+- **Supported:** SAP BTP ABAP Environment, SAP S/4HANA on-prem in the ABAP Cloud development model
+- **Not supported:** SAP ECC, classic (non-Cloud) development model on any release, classic dynpro
 
 The plugin is opinionated and intentionally narrow. PRs adding content for unsupported scopes will be closed — see [`CONTRIBUTING.md`](../CONTRIBUTING.md).
 
@@ -40,6 +40,8 @@ The 15-rule CLAUDE.md (~13 KB) is **not** always-on — each skill reads it expl
 ## MCP capability note
 
 These skills work best with an MCP that exposes ABAP object-source reads. The official `SAPSE.adt-vscode` 1.0 MCP does not — only creation, generation, activation, and unit-test tools. To use these skills today, paste the source inline (from ADT in VS Code) or attach a community MCP that exposes reads (e.g. [`mario-andreschak/mcp-abap-adt`](https://github.com/mario-andreschak/mcp-abap-adt)). See the top-level [README — Known limitations](../README.md#known-limitations-of-the-official-adt-mcp).
+
+The official MCP is tagged `"experimental"` and its capability set is expected to grow. Once source reads land, these skills pick them up without any change — treat paste-only as a transitional workflow, not a permanent one.
 
 ## Files in this plugin
 

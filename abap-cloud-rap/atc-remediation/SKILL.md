@@ -1,6 +1,6 @@
 ---
 name: atc-remediation
-description: Walk through ATC (ABAP Test Cockpit) violations methodically, grouped by category, with concrete fixes per finding. Use when the user asks to fix, remediate, address, or triage ATC findings on an ABAP object, package, or transport. Refuses pseudo-comment suppressions by default. Applies the rule set in ../CLAUDE.md (loaded on invocation). Targets modern ABAP — BTP ABAP Environment and S/4HANA 2023+ in the ABAP Cloud development model.
+description: Walk through ATC (ABAP Test Cockpit) violations methodically, grouped by category, with concrete fixes per finding. Use when the user asks to fix, remediate, address, or triage ATC findings on an ABAP object, package, or transport. Refuses pseudo-comment suppressions by default. Applies the rule set in ../CLAUDE.md (loaded on invocation). Targets modern ABAP — BTP ABAP Environment and S/4HANA on-prem in the ABAP Cloud development model.
 license: Apache-2.0
 ---
 

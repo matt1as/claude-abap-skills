@@ -14,7 +14,7 @@ This file describes the library for anyone working **on** it. End users install 
 This library targets **modern ABAP only**:
 
 - **SAP BTP ABAP Environment** (Steampunk)
-- **SAP S/4HANA 2023 and later**, when developed in the **ABAP Cloud development model**
+- **SAP S/4HANA on-prem**, when developed in the **ABAP Cloud development model**
 
 Everything in this library assumes those two scopes. The guidance is opinionated and intentionally narrow.
 
@@ -25,7 +25,7 @@ Everything in this library assumes those two scopes. The guidance is opinionated
 When working with this library, **never** generate code, refactorings, or recommendations that depend on any of the following:
 
 - SAP ECC
-- Classic non-Cloud ABAP development model (e.g. on-prem stacks before 2023)
+- Classic non-Cloud ABAP development model (any release)
 - Classic dynpro (SE51), screen exits, GUI status programming
 - Logical databases, SAP Query, classic batch input
 - Unreleased SAP APIs, function modules, classes, or CDS entities
@@ -102,13 +102,13 @@ The two plugins are **independent** — neither reads the other's `CLAUDE.md` at
 
 ## When context is ambiguous — ask
 
-Several rules in this library differ between **BTP ABAP Environment** and **S/4HANA 2023+ in ABAP Cloud development model**. Examples:
+Several rules in this library differ between **BTP ABAP Environment** and **S/4HANA on-prem in ABAP Cloud development model**. Examples:
 
 - BTP forbids some constructs (e.g. some `@AbapCatalog.sqlViewName` usage on interface views) that S/4HANA on-prem still allows
 - The set of released APIs differs between systems
 - Some ATC variants behave differently
 
-**If the target system is not clear from context, ask the user before generating code.** Do not silently pick one. A single sentence — "Are you targeting BTP ABAP Environment or S/4HANA 2023+ on-prem in Cloud development model?" — is always the right move when in doubt.
+**If the target system is not clear from context, ask the user before generating code.** Do not silently pick one. A single sentence — "Are you targeting BTP ABAP Environment or S/4HANA on-prem on-prem in Cloud development model?" — is always the right move when in doubt.
 
 ---
 

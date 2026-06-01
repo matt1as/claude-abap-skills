@@ -1,6 +1,6 @@
 ---
 name: rap-bo-design
-description: Design a complete RAP business object end-to-end and create it via the official SAP ABAP MCP. Use when the user asks to design, scaffold, generate, or create a new RAP BO, OData service, Fiori UI service, or RAP managed/unmanaged behavior. Prefers the MCP x-ui-service / ui-service / webapi-service generators; falls back to hand-crafted CDS/BDEF skeletons when no generator fits. Applies the ABAP Cloud / RAP overlay rules in ../CLAUDE.md (loaded on invocation). Targets BTP ABAP Environment and S/4HANA 2023+ in the ABAP Cloud development model.
+description: Design a complete RAP business object end-to-end and create it via the official SAP ABAP MCP. Use when the user asks to design, scaffold, generate, or create a new RAP BO, OData service, Fiori UI service, or RAP managed/unmanaged behavior. Prefers the MCP x-ui-service / ui-service / webapi-service generators; falls back to hand-crafted CDS/BDEF skeletons when no generator fits. Applies the ABAP Cloud / RAP overlay rules in ../CLAUDE.md (loaded on invocation). Targets BTP ABAP Environment and S/4HANA on-prem in the ABAP Cloud development model.
 license: Apache-2.0
 ---
 
@@ -31,7 +31,7 @@ Before doing anything, confirm or ask for each of the following. If anything is 
      - length / decimals where relevant
      - linked currency / unit field for amounts and quantities
 5. **Package** — `$TMP` for trial / throwaway work, or a real `Z*` package. Real packages need a transport request.
-6. **Target system** — BTP ABAP Environment, or S/4HANA 2023+ in ABAP Cloud development model. Released-API sets differ.
+6. **Target system** — BTP ABAP Environment, or S/4HANA on-prem in ABAP Cloud development model. Released-API sets differ.
 
 ## Procedure
 
@@ -114,7 +114,7 @@ Flag every gap in the output report. Do not silently fix issues that change sema
 ## Decision summary
 - Generator: x-ui-service | ui-service | webapi-service | hand-crafted
 - Application type: readOnly | withDraft | withoutDraft — <one sentence why>
-- Target system: BTP | S/4HANA 2023+
+- Target system: BTP | S/4HANA on-prem
 - Package: <name> — <transport: TR / $TMP>
 
 ## Generated spec
@@ -169,5 +169,5 @@ Flag every gap in the output report. Do not silently fix issues that change sema
 - **Always include `strict ( 2 );` in the BDEF** — add it post-generation if missing.
 - **Never propose `unmanaged` for a new BO on new tables.** The generators do not even offer it.
 - **Ask before requesting a transport.** Never auto-select an existing TR; never auto-create one.
-- **Call out BTP vs S/4HANA 2023+ differences** wherever they affect the design (released APIs, annotations).
+- **Call out BTP vs S/4HANA on-prem differences** wherever they affect the design (released APIs, annotations).
 - **Tests are always TODO.** The generator never emits them; the post-generation review always flags this.
