@@ -70,17 +70,17 @@ For a trial system this is usually direct internet access over HTTPS. In a
 production landscape, private connectivity or corporate routing rules may still
 apply.
 
-### 2. Decide whether Cloud Connector is needed
+### 2. Cloud Connector is not part of this path
 
-Use Cloud Connector only when your landscape requires a private network route
-between your workstation and the ABAP system. Typical cases:
+Cloud Connector is **not** required for workstation-to-BTP ADT access. SAP
+Cloud Connector is an on-prem agent that opens a tunnel from your on-prem
+network to a BTP subaccount, so BTP-hosted applications can reach on-prem
+systems. The direction is BTP → on-prem, not workstation → BTP.
 
-- Productive systems are not exposed directly to the public internet
-- Your company requires access through a controlled tunnel or internal route
-- Basis gives you a Cloud Connector based endpoint instead of a direct host
-
-If your BTP trial system is reachable directly over HTTPS, you usually do not
-need Cloud Connector for this workflow.
+Your VS Code / Claude Code workstation reaches BTP ABAP Environment directly
+over HTTPS using the ADT endpoint from the service key. Cloud Connector only
+becomes relevant if your BTP ABAP Environment itself needs to call back into
+on-prem systems — which is out of scope for this setup guide.
 
 ### 3. Create the ADT logon in VS Code
 
@@ -143,6 +143,7 @@ For on-prem access you usually need:
 - Network access to the ABAP system from your workstation
 - Any required corporate VPN or private route
 - SAP GUI or other landscape tooling already used by your team for SSO or trust
+- SNC configured on your workstation — for now this setup requires it
 - A working ADT user with the required authorizations
 
 The exact transport path is Basis-dependent. The important requirement for this
