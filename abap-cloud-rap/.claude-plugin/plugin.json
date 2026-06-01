@@ -1,7 +1,7 @@
 {
   "name": "abap-cloud-rap",
   "description": "ABAP Cloud / RAP overlay: clean core enforcement, RAP behavior design, CDS layering, ATC remediation. Three skills — /abap-cloud-rap:rap-bo-design, :atc-remediation, :clean-core-check — each loading the rule set from CLAUDE.md on invocation. Self-contained; install the clean-abap plugin separately if you want the universal Clean ABAP rules and skills as well (no cross-plugin loading at runtime). Targets BTP ABAP Environment and S/4HANA 2023+ in the ABAP Cloud development model.",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "author": {
     "name": "Mattias Johansson",
     "url": "https://github.com/matt1as"

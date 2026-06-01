@@ -85,9 +85,9 @@ claude-abap-skills/                          # marketplace root
 Each plugin's `CLAUDE.md` holds the **rule set**. It is **not** auto-loaded by Claude Code (the validator warns about this — by design). Each `SKILL.md` is responsible for explicitly reading the rule files it needs:
 
 - `clean-abap` skills read `../CLAUDE.md` (their own plugin's rules)
-- `abap-cloud-rap` skills read `../CLAUDE.md` (their overlay) plus `../../clean-abap/CLAUDE.md` (the Clean ABAP base, when both plugins are installed side-by-side in the marketplace)
+- `abap-cloud-rap` skills read `../CLAUDE.md` (their own plugin's rules)
 
-The two layers compose: **Clean ABAP rules apply first**, then the Cloud/RAP overlay refines or extends them.
+The two plugins are **independent** — neither reads the other's `CLAUDE.md` at runtime. This is intentional: when plugins are installed via the marketplace, each lives in its own versioned subdirectory (e.g. `~/.claude/plugins/cache/claude-abap-skills/clean-abap/0.2.1/`), so cross-plugin relative paths cannot reliably resolve. If a contributor wants a Cloud/RAP skill to also surface Clean ABAP findings, embed the relevant rule inline in `abap-cloud-rap/CLAUDE.md` — do not reach for `../../clean-abap/CLAUDE.md`.
 
 ---
 

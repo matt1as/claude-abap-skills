@@ -22,19 +22,19 @@ This is **not** an MCP server. There is no system connector code here. All syste
 ## The two plugins
 
 ### `clean-abap`
-Universal Clean ABAP rules (auto-loaded into each skill) plus two skills:
+Universal Clean ABAP rules plus two skills (the rules in `CLAUDE.md` are read by each skill on invocation, not loaded at session start):
 
 - **`/clean-abap:review`** — review existing ABAP against the rule set, structured report grouped by severity
 - **`/clean-abap:refactor`** — refactor to Clean ABAP style in deterministic passes, behavior-preserving, asks before writing back
 
 ### `abap-cloud-rap`
-ABAP Cloud / RAP overlay (auto-loaded) plus three skills:
+ABAP Cloud / RAP rules plus three skills (rules read on invocation, as above):
 
 - **`/abap-cloud-rap:rap-bo-design`** — design a complete RAP business object end-to-end; drives the SAP ADT MCP `x-ui-service` / `ui-service` / `webapi-service` generators
 - **`/abap-cloud-rap:atc-remediation`** — walk ATC violations methodically, grouped by category, refuses pseudo-comment suppressions by default
 - **`/abap-cloud-rap:clean-core-check`** — audit objects for clean core compliance (released APIs, no SAP table reads, no classic constructs, no SAP-standard modifications)
 
-The two layers compose: **Clean ABAP rules apply first**, then the Cloud/RAP overlay refines them.
+Each plugin is **independent** — install either or both. They do not load each other's rules at runtime; the layering is conceptual, not enforced by Claude Code. If you want Clean ABAP rules applied to a Cloud/RAP skill invocation, install both plugins and reference the Clean ABAP plugin's behaviour explicitly.
 
 ---
 

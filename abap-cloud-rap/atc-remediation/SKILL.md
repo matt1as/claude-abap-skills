@@ -27,7 +27,7 @@ Also ask which check variant to run against, defaulting to **`ABAP_CLOUD_DEVELOP
 
 ## Procedure
 
-1. **Run ATC via MCP** against the chosen scope and variant. Do not ask the user to paste ATC results — fetch them.
+1. **Get ATC results.** If the connected MCP exposes an ATC tool, run it against the chosen scope and variant. Otherwise — and that includes the official `SAPSE.adt-vscode` 1.0 MCP, which has no ATC tool — ask the user to paste ATC results from ADT or attach a community MCP that does.
 2. **Group findings by check category.** Typical categories:
    - **Clean Core / Cloud compatibility** — unreleased API usage, direct SELECT on SAP-owned tables, language-version violations
    - **Security & Authorization** — missing authorization checks, unsafe SQL, hard-coded user IDs
@@ -97,7 +97,7 @@ Total findings: <N>
 
 ## Hard rules for this command
 
-- **Always run ATC via MCP.** Do not work from pasted output.
+- **Prefer ATC via MCP when one is available.** Fall back to pasted ATC output only when no MCP exposes ATC; never invent ATC findings.
 - **Always group by category.** A flat list of 200 findings is unactionable.
 - **Always cite the ATC check name.** "Fix this" is not a remediation.
 - **Never apply a fix that changes semantics without asking.** EXPORTING→RETURNING is borderline — confirm.

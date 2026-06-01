@@ -25,7 +25,7 @@ If only the official MCP is connected, ask the user to paste the source from ADT
 ## Procedure
 
 1. **Load the rule set.** Read every rule under `## RULE:` in `../CLAUDE.md`. These are the only rules in scope for this review.
-2. **Fetch the source via MCP** if it was not pasted inline. Do not ask the user to paste code that the MCP can read.
+2. **Get the source.** If pasted inline, use it. If only an object name was given, attempt source-read via whichever MCP is connected; if no MCP exposes source reads, ask the user to paste it from ADT. The official `SAPSE.adt-vscode` 1.0 MCP does not have a source-read tool.
 3. **Scan the source against every rule.** Record each violation with: the rule name, the exact line or block in the source, and a one-sentence diagnosis.
 4. **Prioritise ATC-checkable violations first.** Rules with an `**ATC**:` line in the rule set are objectively flaggable by a tool — those go to the top of the report. Rules without an ATC reference are still valid findings but are lower priority.
 5. **Assign a severity to each finding** using this scale:

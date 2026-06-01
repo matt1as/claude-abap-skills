@@ -25,7 +25,7 @@ If only the official MCP is connected, ask the user to paste the source from ADT
 ## Procedure
 
 1. **Load the rule set.** Read every `## RULE:` block in `../CLAUDE.md`. Those are the only refactoring targets.
-2. **Fetch the source via MCP** if not pasted inline. Never ask the user to paste code that the MCP can read.
+2. **Get the source.** If pasted inline, use it. If only an object name was given, attempt source-read via whichever MCP is connected; if no MCP exposes source reads, ask the user to paste it from ADT. The official `SAPSE.adt-vscode` 1.0 MCP does not have a source-read tool.
 3. **Run the review first.** Internally, perform the same analysis as `/clean-abap:review`. Use the prioritised list as your refactor plan.
 4. **Refactor in passes**, in this order. Do not skip ahead:
    1. **Naming pass** — apply `use-problem-domain-names`, `no-magic-numbers-or-literals`
