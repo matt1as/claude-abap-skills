@@ -1,14 +1,14 @@
 # claude-abap-skills
 
-**The official SAP ABAP MCP Server gives Claude hands. This library gives it a brain.**
+**The official SAP ABAP MCP Server gives your AI coding agent hands. This library gives it a brain.**
 
-Two Claude Code plugins for modern ABAP development — SAP BTP ABAP Environment and S/4HANA on-prem in the ABAP Cloud development model. They live together in this repo but are independent — install either or both.
+Two Claude Code plugins for modern ABAP development — SAP BTP ABAP Environment and S/4HANA on-prem in the ABAP Cloud development model. They live together in this repo but are independent — install either or both. An [`AGENTS.md` template](templates/AGENTS.md) is also provided for use with other AI coding agents (GitHub Copilot, Cursor, …).
 
 ---
 
 ## What this is
 
-A collection of **always-on rules, prompt templates, and slash commands** that turn raw Claude output into production-quality modern ABAP, RAP, and ABAP CDS.
+A collection of **always-on rules, prompt templates, and slash commands** that turn raw AI-agent output into production-quality modern ABAP, RAP, and ABAP CDS.
 
 This is **not** an MCP server. There is no system connector code here. All system access — reading objects, writing source, running ATC, executing ABAP Unit — is assumed to flow through the **official SAP ABAP MCP Server**, distributed as part of the `SAPSE.adt-vscode` VS Code extension.
 
@@ -97,6 +97,23 @@ MCP_TIMEOUT=600000 claude   # 10 minutes — plenty of headroom
 
 ---
 
+## Workspace bootstrap for other AI coding agents — `AGENTS.md` template
+
+The plugins are packaged for Claude Code, but the rule sets they enforce describe ABAP, not any specific agent. AI coding agents that read an `AGENTS.md` workspace bootstrap — GitHub Copilot in VS Code, Cursor, and others — can pick up the same guardrails.
+
+[`templates/AGENTS.md`](templates/AGENTS.md) is a drop-in template for an ABAP project workspace. Copy it to the root of your ABAP project, fill in the placeholders (target system, package prefix, GitHub owner), and trim sections that don't apply.
+
+It covers:
+
+- The same modern-ABAP, released-API, Cloud-development-model guardrails as the plugins
+- VS Code virtual-workspace quirks, scoped so they don't fire in Eclipse or out-of-process MCP clients
+- Pointers back into the installed plugins' rule files and slash commands
+- The `MCP_TIMEOUT` caveat for RAP generators
+
+The template follows the convention SAP recommends in its [ADT-for-VS-Code FAQ](https://community.sap.com/t5/technology-blog-posts-by-sap/abap-development-tools-for-visual-studio-code-your-questions-answered/ba-p/14269432) and extends it with the project's full rule set.
+
+---
+
 ## Updating
 
 ```bash
@@ -133,6 +150,8 @@ claude-abap-skills/
 │   ├── rap-bo-design/SKILL.md
 │   ├── atc-remediation/SKILL.md
 │   └── clean-core-check/SKILL.md
+├── templates/
+│   └── AGENTS.md                      # workspace bootstrap for any AI coding agent
 ├── docs/mcp-setup.md
 ├── CLAUDE.md
 ├── CONTRIBUTING.md
